@@ -135,7 +135,7 @@ background-color: #FFFFFF ;
                 </script>
             </div>
                             
-            <p class="right_column_header">Hours</p>
+            <p class="right_column_header" id="hours_title" style="display:none">Hours</p>
             <div id="store_hours_container">
                 <script id="store_hours_template" type="x-tmpl-mustache/text">
                     <li class="directory_content" style="list-style:none">{{h}}</li>
@@ -198,6 +198,9 @@ background-color: #FFFFFF ;
             var pathArray = window.location.pathname.split( '/' );
             var slug = pathArray[pathArray.length-1];
             var store_details = getStoreDetailsBySlug(slug);
+            if (store_details.store_hours.length > 0 ){
+                $("#hours_title").show();
+            } 
             store_details.x_coordinate = store_details.x_coordinate - 17;
             store_details.y_coordinate = store_details.y_coordinate - 75;
             // checkErrorPage(store_details);
@@ -448,7 +451,7 @@ background-color: #FFFFFF ;
             $(container).show();
             $(container).html(item_rendered.join(''));
             if (type == "store_details"){
-                if (collection.website != ""){
+                if (collection.website != "" && collection.website != undefined){
                         $("#store_website_link").show();
                 }
             }
